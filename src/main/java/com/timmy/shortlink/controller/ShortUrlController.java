@@ -25,10 +25,10 @@ public class ShortUrlController {
         return shortUrlService.generateShortUrl(url);
     }
 
-    @RequestMapping("{shortUrl}")
-    public RedirectView redirect(@PathVariable String shortUrl) {
-        String originalUrl = shortUrlService.getOriginalUrl(shortUrl);
-        return new RedirectView(Objects.requireNonNullElse(originalUrl, "/"));
+    @RequestMapping(value = "/{url}", method = RequestMethod.GET)
+    @ResponseBody
+    public String redirect(@PathVariable String url) {
+        return shortUrlService.getOriginalUrl(url);
     }
 
 }
